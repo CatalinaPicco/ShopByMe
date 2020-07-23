@@ -2,7 +2,9 @@ package com.example.personalshop.home.strategyRecycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
 class BasicCardAdapter constructor(private val abstractStrategyCard: AbstractStrategyCard) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -32,6 +34,10 @@ class BasicCardAdapter constructor(private val abstractStrategyCard: AbstractStr
 
     private fun onClick(position: Int) {
         onCardClick?.invoke(data[position].type)
+    }
+
+    fun setData(@NonNull cardItems: List<ICardItem>) {
+        this.data = Collections.unmodifiableList(cardItems)
     }
 
 }

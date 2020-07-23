@@ -9,6 +9,6 @@ data class Attributes (
 	val attribute_group_id : String,
 	val id : String,
 	val value_id : Int,
-	val value_struct : String,
+	val value_struct : Any,
 	val attribute_group_name : String
 )

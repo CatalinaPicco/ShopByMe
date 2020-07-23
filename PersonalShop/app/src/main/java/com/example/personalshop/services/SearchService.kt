@@ -10,9 +10,9 @@ import retrofit2.http.Query
 
 interface SearchService {
 
-    @GET("sites/MLA/search?category=MLA1055&limit=1")
+    @GET("sites/MLA/search?")
     fun searchProducts(
-        @Query("query") query: String,
+        @Query("q") query: String,
         @Query("offset") offset: Int,
         @Query("limit") limit: Int
     ): Observable<SearchResponse>

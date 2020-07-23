@@ -6,7 +6,7 @@ data class Results (
 	val site_id : String,
 	val title : String,
 	val seller : Seller,
-	val price : Int,
+	val price : String,
 	val currency_id : String,
 	val available_quantity : Int,
 	val sold_quantity : Int,
