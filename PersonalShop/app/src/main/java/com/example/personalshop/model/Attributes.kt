@@ -2,7 +2,7 @@ package com.example.personalshop.model
 
 data class Attributes (
 
-	val source : Int,
+	val source : String,
 	val name : String,
 	val value_name : String,
 	val values : List<Values>,
