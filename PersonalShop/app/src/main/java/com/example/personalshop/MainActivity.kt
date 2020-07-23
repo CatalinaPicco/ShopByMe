@@ -2,6 +2,7 @@ package com.example.personalshop
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.personalshop.services.SearchService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -25,9 +26,9 @@ class MainActivity : AppCompatActivity() {
                 beginSearch(edit_search.text.toString())
             }
         }
+
+        //showFragment()
     }
-
-
 
     private fun beginSearch(searchString: String) {
         disposable = searchService.searchProducts()
@@ -37,6 +38,13 @@ class MainActivity : AppCompatActivity() {
                 { result -> println("resultados: " + result.toString())},
                 { error -> println("error: " + error.message) }
             )
+    }
+
+    private fun showFragment(fragment: Fragment) {
+        val manager = supportFragmentManager
+        val transaction =  manager.beginTransaction()
+        transaction.replace(R.id.frame_layout, fragment)
+        transaction.commit()
     }
 
     override fun onPause() {

@@ -1,5 +1,6 @@
 package com.example.personalshop.home.strategyRecycler
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -9,15 +10,28 @@ class BasicCardAdapter constructor(private val abstractStrategyCard: AbstractStr
     var onCardClick: ((ICardItem.Type) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val view = LayoutInflater.from(parent.context).inflate(
+            abstractStrategyCard.getLayout()!!, parent, false
+        )
+        return abstractStrategyCard.getViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return data.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        abstractStrategyCard.setStrategy(data[position])
+        return data[position].type.id
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        abstractStrategyCard.onBindViewHolder(holder, data[position])
+        holder.itemView.setOnClickListener { this.onClick(position) }
+    }
+
+    private fun onClick(position: Int) {
+        onCardClick?.invoke(data[position].type)
     }
 
 }
