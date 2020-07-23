@@ -2,6 +2,7 @@ package com.example.personalshop
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.example.personalshop.home.HomeResultsFragment
 import com.example.personalshop.services.SearchService
@@ -16,11 +17,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_search.setOnClickListener {
-            if (edit_search.text.toString().isNotEmpty()) {
-                //beginSearch(edit_search.text.toString())
+        edit_search.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
             }
-        }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // task HERE
+                //on submit send entire query
+                return false
+            }
+
+        })
 
         showFragment(HomeResultsFragment())
     }
