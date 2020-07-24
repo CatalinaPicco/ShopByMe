@@ -4,18 +4,20 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.personalshop.home.HomeResultsFragment
-import com.example.personalshop.services.SearchService
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var viewModel: MainViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Setting up View model
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
         edit_search.setOnQueryTextListener(object :  SearchView.OnQueryTextListener {
 
@@ -24,8 +26,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                // task HERE
-                //on submit send entire query
+                viewModel?.query?.value = query
                 return false
             }
 

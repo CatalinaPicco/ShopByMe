@@ -3,7 +3,7 @@ package com.example.personalshop.model
 data class Eshop (
 
 	val nick_name : String,
-	val eshop_rubro : String,
+	val eshop_rubro : Any,
 	val eshop_id : Int,
 	val eshop_locations : List<String>,
 	val site_id : String,

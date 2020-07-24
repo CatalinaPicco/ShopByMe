@@ -40,4 +40,8 @@ class BasicCardAdapter constructor(private val abstractStrategyCard: AbstractStr
         this.data = Collections.unmodifiableList(cardItems)
     }
 
+    fun clearData() {
+        this.data = emptyList()
+    }
+
 }
