@@ -1,16 +1,32 @@
 package com.example.personalshop
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.personalshop.home.HomeResultsFragment
+import com.example.personalshop.services.SearchService
+import com.google.android.material.button.MaterialButton
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.categories_layout.*
+import com.example.personalshop.utils.extensions
+import kotlinx.android.synthetic.main.activity_main.view.*
+
 
 class MainActivity : AppCompatActivity() {
 
     private var viewModel: MainViewModel? = null
+    private var disposable: Disposable? = null
+    private val searchService by lazy {
+        SearchService.create()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +48,28 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        tv_category.setOnClickListener {
+            viewModel?.selectedCategory?.value = ""
+            tv_category.text = ""
+            edit_search.setQuery("", false);
+            edit_search.clearFocus();
+        }
+
+        getCategories()
         showFragment(HomeResultsFragment())
+    }
+
+    private fun setButtons(){
+        viewModel?.categories?.forEach { category ->
+            val button = MaterialButton(this)
+            button.id = ViewCompat.generateViewId()
+            button.text = category.name
+            button.setOnClickListener {
+                viewModel?.selectedCategory?.value = category.id
+                tv_category.text = category.name
+            }
+            ll_categories.addView(button)
+        }
     }
 
     private fun showFragment(fragment: Fragment) {
@@ -40,6 +77,24 @@ class MainActivity : AppCompatActivity() {
         val transaction =  manager.beginTransaction()
         transaction.replace(R.id.frame_layout, fragment)
         transaction.commit()
+    }
+
+    private fun getCategories() {
+        disposable = searchService.getCategories()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result -> run {
+                    viewModel?.categories = result
+                    setButtons()
+                } },
+                { error -> println("error: " + error.message) }
+            )
+    }
+
+    override fun onPause() {
+        super.onPause()
+        disposable?.dispose()
     }
 
 }

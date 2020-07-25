@@ -1,5 +1,6 @@
 package com.example.personalshop.home.productCard
 
+import android.view.Gravity
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.R

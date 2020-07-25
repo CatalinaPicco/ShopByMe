@@ -1,7 +1,7 @@
 package com.example.personalshop.home.productCard
 
 import com.example.personalshop.home.strategyRecycler.ICardItem
-import com.example.personalshop.model.Results
+import com.example.personalshop.model.search.Results
 
 class ProductCardItem(result: Results): ICardItem {
     override val type: ICardItem.Type

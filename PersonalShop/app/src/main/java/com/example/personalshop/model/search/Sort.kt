@@ -1,4 +1,4 @@
-package com.example.personalshop.model
+package com.example.personalshop.model.search
 
 data class Sort (
 

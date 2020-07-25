@@ -1,6 +1,6 @@
-package com.example.personalshop.model
+package com.example.personalshop.model.search
 
-data class Filters (
+data class Available_filters (
 
 	val id : String,
 	val name : String,

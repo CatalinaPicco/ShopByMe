@@ -9,20 +9,21 @@ import com.example.personalshop.MainViewModel
 import com.example.personalshop.home.productCard.ProductCardItem
 import com.example.personalshop.home.strategyRecycler.BaseRecyclerViewFragment
 import com.example.personalshop.home.strategyRecycler.BasicCardAdapter
-import com.example.personalshop.model.SearchResponse
 import com.example.personalshop.services.SearchService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class HomeResultsFragment : BaseRecyclerViewFragment() {
 
     var productList = ArrayList<ProductCardItem>()
     private var viewModel: MainViewModel? = null
+    var isLoading = false
+    var offset = 0
 
     private var disposable: Disposable? = null
     private val searchService by lazy {
@@ -47,11 +48,16 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel?.query?.observe(viewLifecycleOwner, Observer {
-            beginSearch(it)
+            productList.clear()
+            beginSearch(it, viewModel?.selectedCategory?.value)
+        })
+
+        viewModel?.selectedCategory?.observe(viewLifecycleOwner, Observer {
+            productList.clear()
+            beginSearch(null, it)
         })
 
         viewModel?.result?.observe(viewLifecycleOwner, Observer {
-            productList.clear()
             it.forEach {
                 productList.add(ProductCardItem(it))
             }
@@ -65,12 +71,19 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
 
     }
 
-    private fun beginSearch(searchString: String) {
-        disposable = searchService.searchProducts(searchString,0, 10)
+    private fun beginSearch(searchString: String?, category: String?) {
+        disposable = searchService.searchProducts(searchString,offset, 10, category)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> viewModel?.setResults(result)},
+                { result ->
+                    run {
+                        viewModel?.setResults(result)
+                        if (result.paging.primary_results > offset){
+
+                        }
+                    }
+                },
                 { error -> println("error: " + error.message) }
             )
     }
