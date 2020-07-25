@@ -1,6 +1,7 @@
 package com.example.personalshop
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         tv_category.setOnClickListener {
             viewModel?.selectedCategory?.value = ""
             tv_category.text = ""
+            tv_category.visibility = View.GONE
             edit_search.setQuery("", false);
             edit_search.clearFocus();
         }
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             button.setOnClickListener {
                 viewModel?.selectedCategory?.value = category.id
                 tv_category.text = category.name
+                tv_category.visibility = View.VISIBLE
             }
             ll_categories.addView(button)
         }

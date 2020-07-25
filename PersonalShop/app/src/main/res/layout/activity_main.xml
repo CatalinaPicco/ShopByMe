@@ -27,6 +27,8 @@
         android:background="#FFF"
         android:clickable="true"
         android:focusable="true"
+        app:searchIcon="@drawable/ic_search_24dp"
+        app:closeIcon="@drawable/ic_close_24dp"
         android:hint="Buscar productos"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,12 +53,14 @@
         android:id="@+id/tv_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:textColor="@color/secondary_text"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_search"
-        app:layout_constraintEnd_toEndOf="@+id/edit_search"
-        app:layout_constraintTop_toTopOf="@+id/edit_search"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintStart_toStartOf="@+id/include"
+        app:layout_constraintTop_toBottomOf="@+id/edit_search"
         tools:text="Buscar en vehículos" />
 
     <include
@@ -69,7 +73,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_search"
+        app:layout_constraintTop_toBottomOf="@+id/tv_category"
         app:layout_constraintVertical_bias="0.0" />
 
     <FrameLayout
