@@ -32,7 +32,7 @@ class BasicCardAdapter constructor(private val abstractStrategyCard: AbstractStr
         holder.itemView.setOnClickListener { this.onClick(position) }
     }
 
-    private fun onClick(position: Int) {
+    fun onClick(position: Int) {
         onCardClick?.invoke(data[position].type)
     }
 

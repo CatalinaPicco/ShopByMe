@@ -1,6 +1,8 @@
 package com.example.personalshop.model.search
 
-data class Attributes (
+import java.io.Serializable
+
+class Attributes (
 
     val source : String,
     val name : String,
@@ -11,4 +13,4 @@ data class Attributes (
     val value_id : Int,
     val value_struct : Any,
     val attribute_group_name : String
-)
+): Serializable

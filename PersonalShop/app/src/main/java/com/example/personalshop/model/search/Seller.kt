@@ -1,6 +1,8 @@
 package com.example.personalshop.model.search
 
-data class Seller (
+import java.io.Serializable
+
+class Seller (
 
     val id : Int,
     val permalink : String,
@@ -10,4 +12,4 @@ data class Seller (
     val tags : List<String>,
     val eshop : Eshop,
     val seller_reputation : Seller_reputation
-)
+): Serializable

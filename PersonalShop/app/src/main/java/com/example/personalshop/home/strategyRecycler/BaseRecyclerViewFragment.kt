@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.personalshop.R
+import kotlinx.android.synthetic.main.custom_recycler_card.*
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 abstract class BaseRecyclerViewFragment: Fragment() {

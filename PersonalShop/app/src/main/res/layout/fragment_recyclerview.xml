@@ -6,11 +6,12 @@
     android:layout_height="match_parent">
 
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.example.personalshop.utils.GenericCardRecycler
         android:background="@color/primary_light"
-        android:id="@+id/recyclerview"
+        android:id="@+id/productRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="200dp"
         android:clipToPadding="false"
         android:padding="5dp" />
 

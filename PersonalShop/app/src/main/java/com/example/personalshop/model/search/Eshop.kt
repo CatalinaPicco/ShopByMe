@@ -1,5 +1,7 @@
 package com.example.personalshop.model.search
 
+import java.io.Serializable
+
 class Eshop (
 
 	val nick_name : String,
@@ -11,4 +13,4 @@ class Eshop (
 	val eshop_status_id : Int,
 	val seller : Int,
 	val eshop_experience : Int
-)
+): Serializable

@@ -1,6 +1,8 @@
 package com.example.personalshop.model.search
 
-data class Results (
+import java.io.Serializable
+
+class Results (
 
     val id : String,
     val site_id : String,
@@ -29,4 +31,4 @@ data class Results (
     val catalog_product_id : String,
     val tags : List<String>,
     val catalog_listing : Boolean
-)
+): Serializable

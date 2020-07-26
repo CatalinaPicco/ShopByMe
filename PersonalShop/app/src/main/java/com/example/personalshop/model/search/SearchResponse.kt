@@ -1,6 +1,8 @@
 package com.example.personalshop.model.search
 
-data class SearchResponse (
+import java.io.Serializable
+
+class SearchResponse (
     val site_id : String,
     val paging : Paging,
     val results : List<Results>,
@@ -10,4 +12,4 @@ data class SearchResponse (
     val available_sorts : List<Available_sorts>,
     val filters : List<Filters>,
     val available_filters : List<Available_filters>
-)
+): Serializable

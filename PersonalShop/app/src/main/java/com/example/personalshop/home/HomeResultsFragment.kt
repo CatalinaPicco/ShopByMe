@@ -1,29 +1,36 @@
 package com.example.personalshop.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.personalshop.HomeResultsStrategy
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.personalshop.MainViewModel
+import com.example.personalshop.R
+import com.example.personalshop.detail.DetailActivity
 import com.example.personalshop.home.productCard.ProductCardItem
+import com.example.personalshop.home.productCard.ProductViewHolder
 import com.example.personalshop.home.strategyRecycler.BaseRecyclerViewFragment
 import com.example.personalshop.home.strategyRecycler.BasicCardAdapter
+import com.example.personalshop.model.search.Results
 import com.example.personalshop.services.SearchService
+import com.example.personalshop.utils.GenericAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 
 class HomeResultsFragment : BaseRecyclerViewFragment() {
 
     var productList = ArrayList<ProductCardItem>()
     private var viewModel: MainViewModel? = null
-    var isLoading = false
-    var offset = 0
+    var genericAdapterProducts: GenericAdapter<Any>? = null
 
     private var disposable: Disposable? = null
     private val searchService by lazy {
@@ -58,30 +65,60 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
         })
 
         viewModel?.result?.observe(viewLifecycleOwner, Observer {
-            it.forEach {
-                productList.add(ProductCardItem(it))
+            if (genericAdapterProducts != null){
+                genericAdapterProducts?.setItems(it)
             }
-            (getRecyclerView().adapter as BasicCardAdapter).setData(
-                productList
-            )
-            (getRecyclerView().adapter as BasicCardAdapter).notifyDataSetChanged()
         })
 
-        getRecyclerView().adapter = BasicCardAdapter(HomeResultsStrategy())
+        productRecycler.mRecyclerView.apply {
+            val layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            this.layoutManager = layoutManager
+        }
+
+        setRecycler()
 
     }
 
+    private fun setRecycler() {
+        genericAdapterProducts = object : GenericAdapter<Any>(emptyList()){
+            override fun getLayoutId(position: Int, obj: Any): Int {
+                return when (obj){
+                    is Results -> R.layout.product_card_layout
+                    else -> R.layout.product_card_layout
+                }
+            }
+
+            override fun getViewHolder(view: View, viewType: Int): RecyclerView.ViewHolder {
+                return when (viewType){
+                    R.layout.product_card_layout -> {
+                        val productViewHolder = ProductViewHolder(view)
+                        productViewHolder.onItemClick = this@HomeResultsFragment::onItemClick
+                        productViewHolder
+                    }
+                    else -> ProductViewHolder(view)
+                }
+            }
+        }
+
+        productRecycler.setGenericAdapter(genericAdapterProducts!!)
+
+    }
+
+    private fun onItemClick(data: Results) {
+        println(data.title)
+        val intent = Intent(this.activity, DetailActivity::class.java)
+        intent.putExtra("product", data)
+        startActivity(intent)
+    }
+
     private fun beginSearch(searchString: String?, category: String?) {
-        disposable = searchService.searchProducts(searchString,offset, 10, category)
+        disposable = searchService.searchProducts(searchString,0, 10, category)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
                     run {
                         viewModel?.setResults(result)
-                        if (result.paging.primary_results > offset){
-
-                        }
                     }
                 },
                 { error -> println("error: " + error.message) }

@@ -1,7 +1,9 @@
 package com.example.personalshop.model.search
 
-data class City (
+import java.io.Serializable
+
+class City (
 
 	val id : String,
 	val name : String
-)
+): Serializable

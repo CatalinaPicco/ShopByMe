@@ -1,7 +1,9 @@
 package com.example.personalshop.model.search
 
-data class Sales (
+import java.io.Serializable
+
+class Sales (
 
 	val period : String,
 	val completed : Int
-)
+): Serializable

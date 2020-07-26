@@ -1,6 +1,8 @@
 package com.example.personalshop.model.search
 
-data class Seller_address (
+import java.io.Serializable
+
+class Seller_address (
 
     val id : String,
     val comment : String,
@@ -11,4 +13,4 @@ data class Seller_address (
     val city : City,
     val latitude : String,
     val longitude : String
-)
+):Serializable
