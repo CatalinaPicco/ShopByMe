@@ -48,6 +48,7 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         viewModel?.productId = intent.getStringExtra("productId")?:""
+        viewModel?.productRating = intent.getStringExtra("productRating")?:""
 
         viewModel?.productDetail?.observe(this, Observer {
             if (it != null){
@@ -106,7 +107,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setViews(productDetailResponse: ProductDetailResponse) {
         tv_detail_title.text = productDetailResponse.title
-        rb_detail.rating = 4.5F
+        rb_detail.rating = (viewModel?.productRating?.toFloat()?:0F)*5
     }
 
     fun setDescription(descriptionResponse: DescriptionResponse){

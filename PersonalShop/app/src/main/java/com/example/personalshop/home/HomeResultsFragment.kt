@@ -114,6 +114,7 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
         println(data.title)
         val intent = Intent(this.activity, DetailActivity::class.java)
         intent.putExtra("productId", data.id)
+        intent.putExtra("productRating", data.seller.seller_reputation.transactions.ratings.positive.toString())
         startActivity(intent)
     }
 

@@ -9,6 +9,7 @@ import java.util.*
 class DetailViewModel : ViewModel() {
 
     lateinit var productId: String
+    lateinit var productRating: String
     var productDetail = MutableLiveData<ProductDetailResponse>()
     var productDescription = MutableLiveData<DescriptionResponse>()
 
