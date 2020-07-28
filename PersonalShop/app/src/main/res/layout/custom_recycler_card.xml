@@ -2,14 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@android:color/white"
+    android:baselineAligned="false"
+    android:gravity="center"
     android:layout_height="match_parent">
 
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:minHeight="200dp"
+        android:layout_gravity="top"
         android:id="@+id/recyclerview"
         />
 

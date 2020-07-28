@@ -11,7 +11,7 @@ class MainViewModel : ViewModel() {
     var query = MutableLiveData<String>()
     var result = MutableLiveData<List<Results>>()
     var categories = MutableLiveData<List<Category>>()
-    var selectedCategory = MutableLiveData<String?>()
+    var selectedCategory = MutableLiveData<Category?>()
     var onSearchClick: (() -> Unit)? = null
 
     init {
@@ -26,10 +26,6 @@ class MainViewModel : ViewModel() {
 
         if (categories.value == null) {
             categories.value = emptyList()
-        }
-
-        if (selectedCategory.value == null) {
-            selectedCategory.value = ""
         }
 
     }

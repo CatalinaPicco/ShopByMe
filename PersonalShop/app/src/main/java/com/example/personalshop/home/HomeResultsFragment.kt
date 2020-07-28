@@ -5,6 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import androidx.core.view.doOnLayout
+import androidx.core.view.doOnNextLayout
+import androidx.core.view.doOnPreDraw
+import androidx.core.view.postDelayed
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +28,7 @@ import com.example.personalshop.utils.GenericAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_categories.*
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 
@@ -56,12 +62,12 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
 
         viewModel?.query?.observe(viewLifecycleOwner, Observer {
             productList.clear()
-            beginSearch(it, viewModel?.selectedCategory?.value)
+            beginSearch(it, viewModel?.selectedCategory?.value?.id)
         })
 
         viewModel?.selectedCategory?.observe(viewLifecycleOwner, Observer {
             productList.clear()
-            beginSearch(null, it)
+            beginSearch(null, it?.id)
         })
 
         viewModel?.result?.observe(viewLifecycleOwner, Observer {

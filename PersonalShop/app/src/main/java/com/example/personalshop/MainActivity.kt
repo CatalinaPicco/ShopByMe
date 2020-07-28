@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.personalshop.home.HomeResultsFragment
 import com.example.personalshop.services.SearchService
@@ -49,18 +50,24 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        viewModel?.selectedCategory?.observe(this, Observer {
+            if (it != null) {
+                tv_category.text = "Buscar en ${it.name}"
+                tv_category.visibility = View.VISIBLE
+            }
+        })
+
         viewModel?.onSearchClick = {
             showFragment(HomeResultsFragment())
         }
 
         tv_category.setOnClickListener {
-            viewModel?.selectedCategory?.value = ""
+            viewModel?.selectedCategory?.value = null
             tv_category.text = ""
             tv_category.visibility = View.GONE
             edit_search.setQuery("", false);
             edit_search.clearFocus();
         }
-
 
         navigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {

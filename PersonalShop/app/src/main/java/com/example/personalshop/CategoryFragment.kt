@@ -92,7 +92,7 @@ class CategoryFragment: Fragment() {
 
     private fun onItemClick(data: Category) {
         println(data.name)
-        viewModel?.selectedCategory?.value = data.id
+        viewModel?.selectedCategory?.value = data
         viewModel?.onSearchClick?.invoke()
     }
 
