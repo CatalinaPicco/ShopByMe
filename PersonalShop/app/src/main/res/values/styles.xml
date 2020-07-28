@@ -14,6 +14,7 @@
 
     <style name="Widget.AppTheme.ActionBar" parent="Theme.MaterialComponents">
         <item name="background">@color/primary</item>
+        <item name="actionMenuTextColor">@color/primary_text</item>
         <item name="elevation">4dp</item>
     </style>
 

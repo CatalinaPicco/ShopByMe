@@ -5,16 +5,14 @@ import androidx.lifecycle.ViewModel
 import com.example.personalshop.model.categories.Category
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.model.search.SearchResponse
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import java.util.*
 
 class MainViewModel : ViewModel() {
 
     var query = MutableLiveData<String>()
     var result = MutableLiveData<List<Results>>()
-    var categories: List<Category> = emptyList()
+    var categories = MutableLiveData<List<Category>>()
     var selectedCategory = MutableLiveData<String?>()
+    var onSearchClick: (() -> Unit)? = null
 
     init {
 
@@ -24,6 +22,10 @@ class MainViewModel : ViewModel() {
 
         if (result.value == null) {
             result.value = emptyList()
+        }
+
+        if (categories.value == null) {
+            categories.value = emptyList()
         }
 
         if (selectedCategory.value == null) {
@@ -36,4 +38,4 @@ class MainViewModel : ViewModel() {
         result.value = search.results
     }
 
-}
+ }

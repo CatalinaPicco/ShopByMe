@@ -107,7 +107,7 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
     private fun onItemClick(data: Results) {
         println(data.title)
         val intent = Intent(this.activity, DetailActivity::class.java)
-        intent.putExtra("product", data)
+        intent.putExtra("productId", data.id)
         startActivity(intent)
     }
 

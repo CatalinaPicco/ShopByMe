@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        viewModel?.onSearchClick = {
+            showFragment(HomeResultsFragment())
+        }
+
         tv_category.setOnClickListener {
             viewModel?.selectedCategory?.value = ""
             tv_category.text = ""
@@ -57,22 +61,23 @@ class MainActivity : AppCompatActivity() {
             edit_search.clearFocus();
         }
 
-        getCategories()
-        showFragment(HomeResultsFragment())
-    }
 
-    private fun setButtons(){
-        viewModel?.categories?.forEach { category ->
-            val button = MaterialButton(this)
-            button.id = ViewCompat.generateViewId()
-            button.text = category.name
-            button.setOnClickListener {
-                viewModel?.selectedCategory?.value = category.id
-                tv_category.text = category.name
-                tv_category.visibility = View.VISIBLE
+        navigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+               R.id.action_search -> {
+                   showFragment(HomeResultsFragment())
+               }
+                R.id.action_navigation -> {
+                    showFragment(CategoryFragment())
+                }
+                R.id.action_categories -> {
+                    showFragment(CategoryFragment())
+                }
             }
-            ll_categories.addView(button)
+            true
         }
+
+        showFragment(HomeResultsFragment())
     }
 
     private fun showFragment(fragment: Fragment) {
@@ -80,19 +85,6 @@ class MainActivity : AppCompatActivity() {
         val transaction =  manager.beginTransaction()
         transaction.replace(R.id.frame_layout, fragment)
         transaction.commit()
-    }
-
-    private fun getCategories() {
-        disposable = searchService.getCategories()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { result -> run {
-                    viewModel?.categories = result
-                    setButtons()
-                } },
-                { error -> println("error: " + error.message) }
-            )
     }
 
     override fun onPause() {
