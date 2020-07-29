@@ -1,16 +1,14 @@
 package com.example.personalshop.utils
 
-import android.R.attr.bottom
 import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Paint
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager
-import android.graphics.Paint.Cap
 import android.graphics.Rect
 import android.view.View
 import androidx.annotation.ColorInt
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import org.jetbrains.annotations.NotNull
 
 
