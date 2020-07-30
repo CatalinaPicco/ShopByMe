@@ -25,7 +25,7 @@ class DotsIndicatorDecoration(
         val strokeWidth = Resources.getSystem().getDisplayMetrics().density * 1
         inactivePaint.setStrokeCap(Paint.Cap.ROUND)
         inactivePaint.setStrokeWidth(strokeWidth)
-        inactivePaint.setStyle(Paint.Style.STROKE)
+        inactivePaint.setStyle(Paint.Style.FILL)
         inactivePaint.setAntiAlias(true)
         inactivePaint.setColor(colorInactive)
 

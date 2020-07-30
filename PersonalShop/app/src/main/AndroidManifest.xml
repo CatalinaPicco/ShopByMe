@@ -23,8 +23,8 @@
             </intent-filter>
             <meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".detail.DetailActivity" />
-        <activity android:name=".splash.SplashActivity" />
+        <activity android:name=".detail.DetailActivity"/>
+        <activity android:name=".splash.SplashActivity"/>
     </application>
 
 </manifest>

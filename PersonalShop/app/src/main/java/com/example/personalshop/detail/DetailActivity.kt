@@ -66,6 +66,10 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
+        toolBar?.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
         imageRecycler.mRecyclerView.apply {
             val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             this.layoutManager = layoutManager
@@ -73,7 +77,7 @@ class DetailActivity : AppCompatActivity() {
 
         val helper = LinearSnapHelper()
         helper.attachToRecyclerView(imageRecycler.mRecyclerView)
-        imageRecycler.mRecyclerView.addItemDecoration(DotsIndicatorDecoration(5,5, 5, resources.getColor(R.color.primary), resources.getColor(R.color.primary_dark)))
+        imageRecycler.mRecyclerView.addItemDecoration(DotsIndicatorDecoration(5,7, 35, resources.getColor(R.color.divider), resources.getColor(R.color.primary_dark)))
 
         getDetail()
         getDescription()

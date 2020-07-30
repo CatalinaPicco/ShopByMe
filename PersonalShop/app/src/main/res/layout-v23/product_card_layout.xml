@@ -9,11 +9,11 @@
     app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cv_product"
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackground"
+        android:id="@+id/cv_product"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_gravity="top"
         android:focusable="true">
 

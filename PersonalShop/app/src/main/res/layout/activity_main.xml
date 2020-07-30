@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,13 +26,13 @@
         android:background="#FFF"
         android:clickable="true"
         android:focusable="true"
-        app:searchIcon="@drawable/ic_search_24dp"
-        app:closeIcon="@drawable/ic_close_24dp"
         android:hint="Buscar productos"
         android:textAlignment="center"
+        app:closeIcon="@drawable/ic_close_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:searchIcon="@drawable/ic_search_24dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -54,13 +53,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:drawableEnd="@drawable/ic_close_24dp"
+        android:drawablePadding="4dp"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
         android:textColor="@color/secondary_text"
         android:textSize="17sp"
         android:visibility="gone"
-        android:scaleY="0.6"
-        android:scaleX="0.6"
-        android:drawablePadding="4dp"
-        android:drawableEnd="@drawable/ic_close_24dp"
         app:layout_constraintBottom_toTopOf="@+id/include"
         app:layout_constraintEnd_toEndOf="@+id/include"
         app:layout_constraintStart_toStartOf="@+id/include"
@@ -94,12 +93,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        app:layout_constraintTop_toBottomOf="@+id/frame_layout"
-        app:menu="@menu/navigation_items"
         app:itemIconTint="@color/secondary_text"
         app:itemTextColor="@color/secondary_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_layout"
+        app:menu="@menu/navigation_items" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

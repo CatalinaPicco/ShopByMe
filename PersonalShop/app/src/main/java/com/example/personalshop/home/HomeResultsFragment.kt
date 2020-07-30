@@ -46,7 +46,6 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java!!)
-
     }
 
     override fun onCreateView(

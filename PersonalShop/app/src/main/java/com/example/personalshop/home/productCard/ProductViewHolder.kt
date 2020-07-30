@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.utils.GenericAdapter
@@ -15,7 +16,7 @@ class ProductViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), Gene
     val title: TextView = itemView.tv_product_title
     val price: TextView = itemView.tv_product_price
     val image: ImageView = itemView.iv_product
-    val container: CardView = itemView.cv_product
+    val container: ConstraintLayout = itemView.cv_product
 
     var onItemClick: ((Results)-> Unit)? = null
 
