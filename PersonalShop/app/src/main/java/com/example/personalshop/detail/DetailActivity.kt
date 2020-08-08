@@ -7,7 +7,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.R
 import com.example.personalshop.home.productCard.ProductImageViewHolder
@@ -18,7 +17,6 @@ import com.example.personalshop.model.search.Results
 import com.example.personalshop.services.SearchService
 import com.example.personalshop.utils.DotsIndicatorDecoration
 import com.example.personalshop.utils.GenericAdapter
-import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

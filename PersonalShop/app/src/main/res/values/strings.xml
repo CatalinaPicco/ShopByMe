@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Personal Shop</string>
-    <string name="search_hint">Buscar</string>
-    <string name="search_label">Buscar</string>
+    <string name="app_name" translatable="false">Personal Shop</string>
+    <string name="search_hint" translatable="false">Buscar</string>
+    <string name="search_label" translatable="false">Buscar</string>
+    <string name="action_settings" translatable="false">Configuración</string>
+    <string name="action_status" translatable="false">Estado</string>
+    <string name="action_search" translatable="false">Buscar</string>
 </resources>

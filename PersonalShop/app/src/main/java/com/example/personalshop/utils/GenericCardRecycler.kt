@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.R
 import kotlinx.android.synthetic.main.custom_recycler_card.view.*
-import kotlinx.android.synthetic.main.fragment_recyclerview.*
 
 class GenericCardRecycler @JvmOverloads constructor(
     context: Context,

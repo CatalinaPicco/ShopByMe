@@ -33,7 +33,7 @@ class ProductDetailResponse (
 	val shipping : Shipping,
 	val international_delivery_mode : String,
 	val seller_address : Seller_address,
-	val seller_contact : String,
+	val seller_contact : Any,
 	val location : Location,
 	val geolocation : Geolocation,
 	val coverage_areas : List<String>,

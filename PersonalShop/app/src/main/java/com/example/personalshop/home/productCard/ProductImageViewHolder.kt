@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.personalshop.R
 import com.example.personalshop.model.detail.Pictures
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.utils.GenericAdapter
@@ -23,6 +24,8 @@ class ProductImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView),
     override fun bind(data: Pictures, position: Int) {
         val picasso = Picasso.get()
         picasso.load(data.url)
+            .placeholder(R.drawable.ic_search_24dp)
+            .error(R.drawable.ic_search_24dp)
             .into(image)
 
         container.setOnClickListener {

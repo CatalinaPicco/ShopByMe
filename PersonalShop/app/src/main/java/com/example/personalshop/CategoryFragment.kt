@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.home.categoryCard.CategoryViewHolder
 import com.example.personalshop.model.categories.Category
+import com.example.personalshop.model.categories.CategoryDetail
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.services.SearchService
 import com.example.personalshop.utils.GenericAdapter
@@ -23,6 +24,7 @@ class CategoryFragment: Fragment() {
 
     private var viewModel: MainViewModel? = null
     var genericAdapterProducts: GenericAdapter<Any>? = null
+    var listaImages: ArrayList<CategoryDetail>? = null
 
     private var disposable: Disposable? = null
     private val searchService by lazy {
@@ -50,6 +52,7 @@ class CategoryFragment: Fragment() {
                 }
             }
         })
+
         setRecycler()
     }
 
@@ -84,14 +87,27 @@ class CategoryFragment: Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result -> run {
-                    viewModel?.categories?.value = result
+                    //viewModel?.categories?.value = result
+                    viewModel?.categoriesAux = result
+                    result.forEach {
+                        getCategoryDetail(it.id)
+                    }
                 } },
                 { error -> println("error: " + error.message) }
             )
     }
 
+    fun getCategoryDetail(categoryId: String) {
+        disposable = searchService.getCategoriesDetail(categoryId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result -> viewModel?.fullCategories(result) },
+                { error -> println("error: " + error.message) }
+            )
+    }
+
     private fun onItemClick(data: Category) {
-        println(data.name)
         viewModel?.selectedCategory?.value = data
         viewModel?.onSearchClick?.invoke()
     }

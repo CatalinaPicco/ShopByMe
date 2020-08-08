@@ -1,6 +1,7 @@
 package com.example.personalshop.services
 
 import com.example.personalshop.model.categories.Category
+import com.example.personalshop.model.categories.CategoryDetail
 import com.example.personalshop.model.description.DescriptionResponse
 import com.example.personalshop.model.detail.ProductDetailResponse
 import com.example.personalshop.model.search.SearchResponse
@@ -21,6 +22,12 @@ interface SearchService {
     @GET("sites/MLA/categories")
     fun getCategories(
     ): Observable<List<Category>>
+
+    @GET("categories/{Category_id}")
+    fun getCategoriesDetail(
+        @Path("Category_id") category: String?
+    ): Observable<CategoryDetail>
+
 
     @GET("sites/MLA/search?")
     fun searchProducts(
