@@ -57,6 +57,15 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        viewModel?.query?.observe(this, Observer {
+            if (it != null && it.isNotEmpty()  ){
+                tv_product.text = "Resultados para ${it}"
+                tv_product.visibility = View.VISIBLE
+            } else {
+                tv_product.visibility = View.GONE
+            }
+        })
+
         viewModel?.onSearchClick = {
             showFragment(HomeResultsFragment())
         }

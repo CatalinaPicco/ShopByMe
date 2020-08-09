@@ -14,7 +14,7 @@ class MainViewModel : ViewModel() {
     var result = MutableLiveData<List<Results>>()
     var categories = MutableLiveData<List<Category>>()
     var categoriesAux = emptyList<Category>()
-    var productsAux = emptyList<Results>()
+    var productsAux = MutableLiveData<List<Results>>()
     var selectedCategory = MutableLiveData<Category?>()
     var onSearchClick: (() -> Unit)? = null
     var isLoading = MutableLiveData<Boolean>()
@@ -79,13 +79,11 @@ class MainViewModel : ViewModel() {
     }
 
     fun fullImages(detail: ProductDetailResponse?) {
-       productsAux.forEach {
+       result.value?.forEach {
            if (it.id == detail?.id){
                it.thumbnail = detail.pictures.get(0).url
            }
        }
-        result.value = productsAux
-        doStuff(result.value!!)
     }
 
 }

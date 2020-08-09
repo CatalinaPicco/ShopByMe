@@ -26,6 +26,8 @@ class ProductViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), Gene
         price.text = data.price
         val picasso = Picasso.get()
         picasso.load(data.thumbnail)
+            .fit()
+            .centerCrop()
             .placeholder(R.drawable.ic_search_24dp)
             .error(R.drawable.ic_search_24dp)
             .into(image)

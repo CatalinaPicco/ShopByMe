@@ -6,6 +6,6 @@
     android:layout_width="match_parent"
     app:titleTextColor="@color/secondary_text"
     app:subtitleTextColor="@color/secondary_text"
+    android:fontFamily="@font/roboto_medium"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/primary"
-    xmlns:tools="http://schemas.android.com/tools" />
+    android:background="@color/primary" />

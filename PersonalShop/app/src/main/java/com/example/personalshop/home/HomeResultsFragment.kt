@@ -81,8 +81,8 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
             addOnScrollListener(object: EndlessRecyclerViewScrollListener(layoutManager as StaggeredGridLayoutManager){
                 override fun onLoadMore(page: Int, totalItemsCount: Int) {
                     if (!viewModel?.isAllLoaded!! && !viewModel?.isLoading?.value!!){
-                        beginSearch(viewModel?.query?.value, viewModel?.selectedCategory?.value?.id)
                         viewModel!!.offset += itemsPerPage
+                        beginSearch(viewModel?.query?.value, viewModel?.selectedCategory?.value?.id)
                         viewModel?.isLoading?.value = true
                     }
 
@@ -132,10 +132,10 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
             .subscribe(
                 { result ->
                     run {
-                        viewModel?.productsAux = result.results
                         result.results.forEach {
                             getImage(it.id)
                         }
+                        viewModel?.doStuff(result.results)
                     }
                 },
                 { error -> println("error: " + error.message) }
