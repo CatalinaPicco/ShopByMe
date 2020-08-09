@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.personalshop.R
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.utils.GenericAdapter
 import com.squareup.picasso.Picasso
@@ -25,6 +26,8 @@ class ProductViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), Gene
         price.text = data.price
         val picasso = Picasso.get()
         picasso.load(data.thumbnail)
+            .placeholder(R.drawable.ic_search_24dp)
+            .error(R.drawable.ic_search_24dp)
             .into(image)
 
         container.setOnClickListener {

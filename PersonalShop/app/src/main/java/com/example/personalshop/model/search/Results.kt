@@ -17,7 +17,7 @@ class Results (
     val stop_time : String,
     val condition : String,
     val permalink : String,
-    val thumbnail : String,
+    var thumbnail : String,
     val accepts_mercadopago : Boolean,
     val installments : Installments,
     val address : Address,

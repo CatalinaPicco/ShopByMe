@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
 
         // set hint and the text colors
         val txtSearch = searchView.findViewById<View>(R.id.search_src_text) as EditText
-        txtSearch.hint = "Buscar productos..."
+        txtSearch.hint = "Buscar productos ..."
         txtSearch.setHintTextColor(resources.getColor(R.color.secondary_text))
         txtSearch.setTextColor(resources.getColor(R.color.primary_text))
 
@@ -158,6 +158,7 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 callSearch(query)
+                viewModel?.emptyQuery()
                 searchView.clearFocus()
                 showFragment(HomeResultsFragment())
                 return true

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.personalshop.model.categories.Category
 import com.example.personalshop.model.categories.CategoryDetail
+import com.example.personalshop.model.detail.ProductDetailResponse
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.model.search.SearchResponse
 
@@ -13,10 +14,12 @@ class MainViewModel : ViewModel() {
     var result = MutableLiveData<List<Results>>()
     var categories = MutableLiveData<List<Category>>()
     var categoriesAux = emptyList<Category>()
+    var productsAux = emptyList<Results>()
     var selectedCategory = MutableLiveData<Category?>()
     var onSearchClick: (() -> Unit)? = null
     var isLoading = MutableLiveData<Boolean>()
     var isAllLoaded = false
+    var offset = 0
 
     init {
 
@@ -59,15 +62,30 @@ class MainViewModel : ViewModel() {
     fun doStuff(it: List<Results>) {
         isLoading.value = false
         if (result.value.isNullOrEmpty()){
-            result?.value = it
+            result.value = it
         } else {
-            val auxList: MutableList<Results> = result?.value as MutableList<Results>
+            val auxList: MutableList<Results> = result.value as MutableList<Results>
             auxList.addAll(it)
             if (it.size < 10){
                 isAllLoaded = true
             }
-            result?.value = auxList
+            result.value = auxList
         }
+    }
+
+    fun emptyQuery() {
+        offset = 0
+        isAllLoaded = false
+    }
+
+    fun fullImages(detail: ProductDetailResponse?) {
+       productsAux.forEach {
+           if (it.id == detail?.id){
+               it.thumbnail = detail.pictures.get(0).url
+           }
+       }
+        result.value = productsAux
+        doStuff(result.value!!)
     }
 
 }

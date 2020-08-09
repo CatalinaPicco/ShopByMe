@@ -46,4 +46,5 @@ abstract class GenericAdapter<T>: RecyclerView.Adapter<RecyclerView.ViewHolder> 
     internal interface Binder<T> {
         fun bind(data: T, position: Int)
     }
+
 }
