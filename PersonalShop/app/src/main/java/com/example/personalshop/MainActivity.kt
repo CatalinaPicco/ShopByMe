@@ -2,8 +2,10 @@ package com.example.personalshop
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.net.wifi.rtt.CivicLocationKeys.LANGUAGE
 import android.os.Build
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -26,6 +28,9 @@ import com.example.personalshop.services.SearchService
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_toolbar.*
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(true)
 
         setSearchtollbar()
+        val currencyFormat = NumberFormat.getCurrencyInstance()
 
         viewModel?.selectedCategory?.observe(this, Observer {
             if (it != null) {
@@ -84,6 +90,8 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_home, menu)
         return true
     }
+
+
 
     fun setSearchtollbar() {
         if (searchtoolbar != null) {

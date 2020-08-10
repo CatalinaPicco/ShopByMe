@@ -5,4 +5,6 @@
     <string name="action_settings" translatable="false">Configuración</string>
     <string name="action_status" translatable="false">Estado</string>
     <string name="action_search" translatable="false">Buscar</string>
+
+    <string name="price_format" translatable="false">$ %s</string>
 </resources>
