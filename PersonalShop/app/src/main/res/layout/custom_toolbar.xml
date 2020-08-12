@@ -18,8 +18,10 @@
             android:layout_height="wrap_content"
             android:textColor="@color/secondary_text"
             android:layout_marginEnd="?android:attr/actionBarSize"
-            android:text="Detalle"
-            android:gravity="center"
+            android:text="Detalle de producto"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="start"
             />
 
 

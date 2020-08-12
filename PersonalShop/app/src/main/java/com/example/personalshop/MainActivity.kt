@@ -2,10 +2,18 @@ package com.example.personalshop
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.graphics.Color
+import android.graphics.Typeface.BOLD
+import android.graphics.Typeface.ITALIC
 import android.net.wifi.rtt.CivicLocationKeys.LANGUAGE
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.method.TextKeyListener
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -58,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel?.selectedCategory?.observe(this, Observer {
             if (it != null) {
+                viewModel?.query?.value = null
                 tv_category.text = "Buscar en ${it.name}"
                 tv_category.visibility = View.VISIBLE
             }
@@ -65,8 +74,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel?.query?.observe(this, Observer {
             if (it != null && it.isNotEmpty()  ){
-                tv_product.text = "Resultados para ${it}"
                 tv_product.visibility = View.VISIBLE
+                val spannable = SpannableString(getString(R.string.result_title, it.toUpperCase()))
+                spannable.setSpan(
+                    ForegroundColorSpan(resources.getColor(R.color.primary_dark)),
+                    16, spannable.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                tv_product.text = spannable
             } else {
                 tv_product.visibility = View.GONE
             }

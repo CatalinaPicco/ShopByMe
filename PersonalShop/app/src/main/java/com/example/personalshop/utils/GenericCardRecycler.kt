@@ -28,6 +28,7 @@ class GenericCardRecycler @JvmOverloads constructor(
         mRecyclerView = this.recyclerview!!
         mProgress = this.loading_spinner!!
         mRecyclerView.layoutManager = layoutManager
+        mRecyclerView.invalidateItemDecorations()
     }
 
     fun setGenericAdapter(genericAdapter: GenericAdapter<Any>){

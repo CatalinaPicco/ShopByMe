@@ -47,6 +47,7 @@ dependencies {
     //Picasso
     def picassoVersion = "2.71828"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation 'com.squareup.okio:okio:1.17.2'
     def lifecycle_version = "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'

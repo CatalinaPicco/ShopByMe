@@ -7,4 +7,5 @@
     <string name="action_search" translatable="false">Buscar</string>
 
     <string name="price_format" translatable="false">$ %s</string>
+    <string name="result_title" translatable="false">Resultados para %s</string>
 </resources>

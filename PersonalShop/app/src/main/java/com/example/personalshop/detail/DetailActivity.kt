@@ -22,6 +22,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DetailActivity : AppCompatActivity() {
@@ -109,7 +111,10 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setViews(productDetailResponse: ProductDetailResponse) {
-        tv_detail_title.text = productDetailResponse.title
+        tv_product_title.text = productDetailResponse.title
+        tv_price.text = resources.getString(R.string.price_format, String.format(
+            Locale.GERMAN,"%,2f", productDetailResponse.price.toDouble()).dropLast(4))
+        rb_detail.rating = (viewModel?.productRating?.toFloat()?:0F)*5
         rb_detail.rating = (viewModel?.productRating?.toFloat()?:0F)*5
     }
 

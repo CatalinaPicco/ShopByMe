@@ -10,6 +10,7 @@ import com.example.personalshop.R
 import com.example.personalshop.model.categories.Category
 import com.example.personalshop.model.detail.Pictures
 import com.example.personalshop.utils.GenericAdapter
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.category_layout.view.*
 import kotlinx.android.synthetic.main.producto_image_layout.view.*
@@ -28,9 +29,14 @@ class CategoryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), Gen
         val picasso = Picasso.get()
         if (!data.image.isNullOrEmpty()){
             picasso.load(data.image)
-                .placeholder(R.drawable.ic_search_24dp)
-                .error(R.drawable.ic_search_24dp)
-                .into(image)
+                .into(image, object: com.squareup.picasso.Callback {
+                    override fun onSuccess() {
+                        //set animations here
+                    }
+                    override fun onError(e: java.lang.Exception?) {
+                        //do smth when there is picture loading error
+                    }
+                })
         }
         container.setOnClickListener {
             onItemClick?.invoke(data)
