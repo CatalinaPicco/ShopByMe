@@ -31,6 +31,7 @@ import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.personalshop.home.EmptyFragment
 import com.example.personalshop.home.HomeResultsFragment
 import com.example.personalshop.services.SearchService
 import io.reactivex.disposables.Disposable
@@ -62,7 +63,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(true)
 
         setSearchtollbar()
-        val currencyFormat = NumberFormat.getCurrencyInstance()
 
         viewModel?.selectedCategory?.observe(this, Observer {
             if (it != null) {
@@ -71,6 +71,14 @@ class MainActivity : AppCompatActivity() {
                 tv_category.visibility = View.VISIBLE
             }
         })
+
+        viewModel?.onEmpty = {
+            showFragment(EmptyFragment())
+        }
+
+        viewModel?.onCleaned = {
+            showFragment(CategoryFragment())
+        }
 
         viewModel?.query?.observe(this, Observer {
             if (it != null && it.isNotEmpty()  ){
@@ -103,8 +111,6 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_home, menu)
         return true
     }
-
-
 
     fun setSearchtollbar() {
         if (searchtoolbar != null) {
@@ -147,12 +153,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initSearchView() {
         val searchView = searchtoolbar.menu.findItem(R.id.action_filter_search).actionView as SearchView
-
-        // Enable/Disable Submit button in the keyboard
-
         searchView.isSubmitButtonEnabled = false
-
-        // Change search close button image
 
         val closeButton = searchView.findViewById<View>(R.id.search_close_btn) as ImageView
         closeButton.setImageResource(R.drawable.ic_close_24dp)
@@ -170,8 +171,6 @@ class MainActivity : AppCompatActivity() {
         txtSearch.hint = "Buscar productos ..."
         txtSearch.setHintTextColor(resources.getColor(R.color.secondary_text))
         txtSearch.setTextColor(resources.getColor(R.color.primary_text))
-
-        // set the cursor
 
         val searchTextView =
             searchView.findViewById<View>(androidx.appcompat.R.id.search_src_text) as AutoCompleteTextView

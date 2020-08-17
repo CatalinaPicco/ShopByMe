@@ -6,6 +6,6 @@ class Attribute_combinations (
 	val name : String,
 	val value_id : Int,
 	val value_name : String,
-	val value_struct : String,
+	val value_struct : Any,
 	val values : List<Values>
 )

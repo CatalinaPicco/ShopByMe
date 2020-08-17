@@ -56,9 +56,6 @@
                 android:textColor="@color/secondary_text"
                 android:fontFamily="@font/roboto_regular"
                 android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageRecycler"
                 tools:text="$ 100.000,00" />
 
             <RatingBar
@@ -77,12 +74,42 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_price"
                 app:layout_constraintTop_toBottomOf="@+id/tv_price" />
 
+            <TextView
+                android:id="@+id/tv_accepts_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/secondary_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="13sp"
+                android:drawableStart="@drawable/ic_credit_card_24dp"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                tools:text="Acepta Mercadopago" />
+
+            <TextView
+                android:id="@+id/tv_freeshipping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/secondary_text"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="13sp"
+                android:gravity="center_vertical"
+                android:drawableStart="@drawable/ic_local_shipping_24dp"
+                android:drawablePadding="5dp"
+                tools:text="Envio gratis" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_comprar"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="15dp"
                 android:text="Comprar" />
 

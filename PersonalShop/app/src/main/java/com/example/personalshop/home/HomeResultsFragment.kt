@@ -132,10 +132,15 @@ class HomeResultsFragment : BaseRecyclerViewFragment() {
             .subscribe(
                 { result ->
                     run {
+                        if (result.results.isEmpty() && viewModel?.query?.value?.isNotEmpty()!!){
+                            viewModel?.onEmpty?.invoke()
+                        } else if (result.results.isEmpty()) {
+                            viewModel?.onCleaned?.invoke()
+                        }
                         result.results.forEach {
                             getImage(it.id)
                         }
-                        viewModel?.doStuff(result.results)
+                        viewModel?.doPaginate(result.results)
                     }
                 },
                 { error -> println("error: " + error.message) }

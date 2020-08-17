@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_margin="4dp"
+    android:layout_margin="7dp"
     app:cardCornerRadius="9dp"
     app:cardElevation="2dp"
     >
@@ -23,15 +23,26 @@
         android:id="@+id/iv_category"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
         android:adjustViewBounds="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_launcher_background" />
+
+    <ProgressBar
+        android:id="@+id/pb_category_loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_category_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_category_title"
@@ -40,8 +51,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:padding="16sp"
-        android:textColor="@color/primary_text"
-        android:textSize="18sp"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/iv_category"

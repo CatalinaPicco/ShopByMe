@@ -115,7 +115,15 @@ class DetailActivity : AppCompatActivity() {
         tv_price.text = resources.getString(R.string.price_format, String.format(
             Locale.GERMAN,"%,2f", productDetailResponse.price.toDouble()).dropLast(4))
         rb_detail.rating = (viewModel?.productRating?.toFloat()?:0F)*5
-        rb_detail.rating = (viewModel?.productRating?.toFloat()?:0F)*5
+
+        if (productDetailResponse.accepts_mercadopago) {
+            tv_accepts_card.text = "Acepta Mercadopago"
+        } else { tv_accepts_card.visibility = View.GONE }
+        if (productDetailResponse.shipping.free_shipping) {
+            tv_freeshipping.text = "Envío gratis"
+        } else {
+            tv_freeshipping.visibility = View.GONE
+        }
     }
 
     fun setDescription(descriptionResponse: DescriptionResponse){

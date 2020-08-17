@@ -17,6 +17,8 @@ class MainViewModel : ViewModel() {
     var productsAux = MutableLiveData<List<Results>>()
     var selectedCategory = MutableLiveData<Category?>()
     var onSearchClick: (() -> Unit)? = null
+    var onEmpty: (() -> Unit)? = null
+    var onCleaned: (() -> Unit)? = null
     var isLoading = MutableLiveData<Boolean>()
     var isAllLoaded = false
     var offset = 0
@@ -42,14 +44,6 @@ class MainViewModel : ViewModel() {
 
     }
 
-    fun setResults(search: SearchResponse){
-        result.value = search.results
-    }
-
-    fun setResultsValue(search: List<Results>){
-        result.value = search
-    }
-
     fun fullCategories(result: CategoryDetail?) {
         categoriesAux.forEach {
            if (it.id == result?.id){
@@ -59,7 +53,7 @@ class MainViewModel : ViewModel() {
         categories.value = categoriesAux
     }
 
-    fun doStuff(it: List<Results>) {
+    fun doPaginate(it: List<Results>) {
         isLoading.value = false
         if (result.value.isNullOrEmpty()){
             result.value = it
