@@ -2,18 +2,11 @@ package com.example.personalshop
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.graphics.Color
-import android.graphics.Typeface.BOLD
-import android.graphics.Typeface.ITALIC
-import android.net.wifi.rtt.CivicLocationKeys.LANGUAGE
 import android.os.Build
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.method.TextKeyListener
 import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -27,6 +20,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -37,18 +31,12 @@ import com.example.personalshop.services.SearchService
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_toolbar.*
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private var viewModel: MainViewModel? = null
     private var disposable: Disposable? = null
-    private val searchService by lazy {
-        SearchService.create()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -67,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         viewModel?.selectedCategory?.observe(this, Observer {
             if (it != null) {
                 viewModel?.query?.value = null
-                tv_category.text = "Buscar en ${it.name}"
+                tv_category.text = /**/"Buscar en ${it.name}"
                 tv_category.visibility = View.VISIBLE
             }
         })
@@ -85,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 tv_product.visibility = View.VISIBLE
                 val spannable = SpannableString(getString(R.string.result_title, it.toUpperCase()))
                 spannable.setSpan(
-                    ForegroundColorSpan(resources.getColor(R.color.primary_dark)),
+                    ForegroundColorSpan(ContextCompat.getColor(this, R.color.primary_dark)),
                     16, spannable.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 tv_product.text = spannable
             } else {
@@ -115,34 +103,31 @@ class MainActivity : AppCompatActivity() {
     fun setSearchtollbar() {
         if (searchtoolbar != null) {
             searchtoolbar.inflateMenu(R.menu.menu_search)
-            val search_menu = searchtoolbar.getMenu()
+            val search_menu = searchtoolbar.menu
 
             searchtoolbar.setNavigationOnClickListener{
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
                     circleReveal(R.id.searchtoolbar, 1, true, false)
                 else
-                    searchtoolbar.setVisibility(View.GONE)
+                    searchtoolbar.visibility = View.GONE
             }
 
             val item_search = search_menu.findItem(R.id.action_filter_search)
 
-            MenuItemCompat.setOnActionExpandListener(
-                item_search,
-                object : MenuItemCompat.OnActionExpandListener {
-                    override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                        // Do something when collapsed
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            circleReveal(R.id.searchtoolbar, 1, true, false)
-                        } else
-                            searchtoolbar.visibility = View.GONE
-                        return true
-                    }
+            item_search.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+                override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                    return true
+                }
 
-                    override fun onMenuItemActionExpand(item: MenuItem): Boolean {
-                        // Do something when expanded
-                        return true
-                    }
-                })
+                override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                    // Do something when collapsed
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        circleReveal(R.id.searchtoolbar, 1, true, false)
+                    } else
+                        searchtoolbar.visibility = View.GONE
+                    return true
+                }
+            })
 
             initSearchView()
 
@@ -169,8 +154,8 @@ class MainActivity : AppCompatActivity() {
         // set hint and the text colors
         val txtSearch = searchView.findViewById<View>(R.id.search_src_text) as EditText
         txtSearch.hint = "Buscar productos ..."
-        txtSearch.setHintTextColor(resources.getColor(R.color.secondary_text))
-        txtSearch.setTextColor(resources.getColor(R.color.primary_text))
+        txtSearch.setHintTextColor(ContextCompat.getColor(this, R.color.secondary_text))
+        txtSearch.setTextColor(ContextCompat.getColor(this,R.color.primary_text))
 
         val searchTextView =
             searchView.findViewById<View>(androidx.appcompat.R.id.search_src_text) as AutoCompleteTextView
@@ -207,10 +192,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
-        when (item.getItemId()) {
+        when (item.itemId) {
             R.id.action_status -> {
                 showFragment(CategoryFragment())
                 return true
@@ -247,9 +231,9 @@ class MainActivity : AppCompatActivity() {
         var width = myView.width
 
         if(posFromRight>0)
-            width-=(posFromRight*getResources().getDimensionPixelSize(R.dimen.abc_action_button_min_width_material))-(getResources().getDimensionPixelSize(R.dimen.abc_action_button_min_width_material)/ 2)
+            width-=(posFromRight* resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material))-(resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_material)/ 2)
         if(containsOverflow)
-            width-=getResources().getDimensionPixelSize(R.dimen.abc_action_button_min_width_overflow_material)
+            width-= resources.getDimensionPixelSize(R.dimen.abc_action_button_min_width_overflow_material)
 
         val cx = width
         val cy = myView.height / 2
@@ -278,7 +262,6 @@ class MainActivity : AppCompatActivity() {
 
         // start the animation
         anim.start()
-
 
     }
 

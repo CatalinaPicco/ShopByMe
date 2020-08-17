@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.home.categoryCard.CategoryViewHolder
 import com.example.personalshop.model.categories.Category
-import com.example.personalshop.model.categories.CategoryDetail
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.services.SearchService
 import com.example.personalshop.utils.GenericAdapter
