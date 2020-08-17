@@ -22,6 +22,7 @@ class MainViewModel : ViewModel() {
     var isLoading = MutableLiveData<Boolean>()
     var isAllLoaded = false
     var offset = 0
+    var alreadyExecuted = false
 
     init {
 

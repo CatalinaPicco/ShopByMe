@@ -23,7 +23,6 @@ class CategoryFragment: Fragment() {
 
     private var viewModel: MainViewModel? = null
     var genericAdapterProducts: GenericAdapter<Any>? = null
-    var listaImages: ArrayList<CategoryDetail>? = null
 
     private var disposable: Disposable? = null
     private val searchService by lazy {
@@ -42,7 +41,11 @@ class CategoryFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java!!)
-        getCategories()
+
+        if(!viewModel!!.alreadyExecuted) {
+            getCategories()
+            viewModel!!.alreadyExecuted = true
+        }
 
         viewModel?.categories?.observe(viewLifecycleOwner, Observer {
             if (it != null){
