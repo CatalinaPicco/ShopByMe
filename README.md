@@ -142,5 +142,8 @@ if (!data.image.isNullOrEmpty()){
         }
 ```
 
+<img align="center" src="https://github.com/CatalinaPicco/ShopByMe/blob/master/footer.PNG">
+
+## Thanks for reading
 
 
