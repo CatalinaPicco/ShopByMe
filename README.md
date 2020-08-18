@@ -1,4 +1,4 @@
-### ShopByMe
+### Personal Shop
 A personal experiment to improve searching products
 
 # First definitions
