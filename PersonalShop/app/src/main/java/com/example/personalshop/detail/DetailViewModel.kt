@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.personalshop.model.description.DescriptionResponse
 import com.example.personalshop.model.detail.ProductDetailResponse
-import java.util.*
 
 class DetailViewModel : ViewModel() {
 

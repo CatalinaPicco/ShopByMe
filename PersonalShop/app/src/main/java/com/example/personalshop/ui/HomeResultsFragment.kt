@@ -1,4 +1,4 @@
-package com.example.personalshop.home
+package com.example.personalshop.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.personalshop.MainViewModel
 import com.example.personalshop.R
 import com.example.personalshop.detail.DetailActivity
-import com.example.personalshop.home.productCard.ProductViewHolder
-import com.example.personalshop.home.strategyRecycler.BaseRecyclerViewFragment
+import com.example.personalshop.ui.productCard.ProductViewHolder
+import com.example.personalshop.utils.strategyRecycler.BaseRecyclerViewFragment
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.utils.EndlessRecyclerViewScrollListener
 import com.example.personalshop.utils.GenericAdapter

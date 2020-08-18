@@ -8,4 +8,18 @@
     app:subtitleTextColor="@color/secondary_text"
     android:fontFamily="@font/roboto_medium"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/primary" />
+    android:background="@color/primary">
+
+    <TextView
+        android:id="@+id/tv_toolbar_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/secondary_text"
+        android:layout_marginEnd="?android:attr/actionBarSize"
+        android:text="Personal Shop"
+        android:textSize="18sp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="start"
+        />
+
+</androidx.appcompat.widget.Toolbar>

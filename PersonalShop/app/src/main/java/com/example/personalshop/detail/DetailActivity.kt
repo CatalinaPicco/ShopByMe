@@ -3,13 +3,14 @@ package com.example.personalshop.detail
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.R
-import com.example.personalshop.home.productCard.ProductImageViewHolder
+import com.example.personalshop.ui.productCard.ProductImageViewHolder
 import com.example.personalshop.model.description.DescriptionResponse
 import com.example.personalshop.model.detail.Pictures
 import com.example.personalshop.model.detail.ProductDetailResponse
@@ -77,7 +78,7 @@ class DetailActivity : AppCompatActivity() {
 
         val helper = LinearSnapHelper()
         helper.attachToRecyclerView(imageRecycler.mRecyclerView)
-        imageRecycler.mRecyclerView.addItemDecoration(DotsIndicatorDecoration(5,7, 35, resources.getColor(R.color.divider), resources.getColor(R.color.primary_dark)))
+        imageRecycler.mRecyclerView.addItemDecoration(DotsIndicatorDecoration(5,7, 35, ContextCompat.getColor(this, R.color.divider), ContextCompat.getColor(this, R.color.primary_dark)))
 
         getDetail()
         getDescription()

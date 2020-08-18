@@ -85,6 +85,7 @@ class MainViewModel : ViewModel() {
 
     fun emptyCategory() {
         selectedCategory.value = null
+        onCleaned?.invoke()
     }
 
     private fun fullImages(detail: ProductDetailResponse?) {

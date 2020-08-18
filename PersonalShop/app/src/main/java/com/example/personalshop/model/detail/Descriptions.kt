@@ -1,6 +1,6 @@
 package com.example.personalshop.model.detail
 
-class Descriptions (
+class Descriptions(
 
-	val id : String
+    val id: String
 )

@@ -1,4 +1,4 @@
-package com.example.personalshop.home
+package com.example.personalshop.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

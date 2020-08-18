@@ -1,4 +1,4 @@
-package com.example.personalshop.home.strategyRecycler
+package com.example.personalshop.utils.strategyRecycler
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -6,16 +6,14 @@ import com.example.personalshop.model.description.DescriptionResponse
 import com.example.personalshop.model.detail.ProductDetailResponse
 import com.example.personalshop.model.search.SearchResponse
 import io.reactivex.Observable
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-
-
 
 interface SearchService {
 
@@ -57,9 +55,11 @@ interface SearchService {
 
             val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(
-                    RxJava2CallAdapterFactory.create())
+                    RxJava2CallAdapterFactory.create()
+                )
                 .addConverterFactory(
-                    GsonConverterFactory.create())
+                    GsonConverterFactory.create()
+                )
                 .baseUrl("https://api.mercadolibre.com/")
                 .client(httpClient.build())
                 .build()

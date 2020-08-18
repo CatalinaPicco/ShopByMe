@@ -2,9 +2,9 @@ package com.example.personalshop.model.search
 
 import java.io.Serializable
 
-class Ratings (
+class Ratings(
 
-	val negative : Double,
-	val positive : Double,
-	val neutral : Double
-): Serializable
+    val negative: Double,
+    val positive: Double,
+    val neutral: Double
+) : Serializable

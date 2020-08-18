@@ -2,9 +2,9 @@ package com.example.personalshop.model.search
 
 import java.io.Serializable
 
-class Claims (
+class Claims(
 
-	val rate : Double,
-	val value : Int,
-	val period : String
-): Serializable
+    val rate: Double,
+    val value: Int,
+    val period: String
+) : Serializable

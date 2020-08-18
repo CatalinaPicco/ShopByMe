@@ -1,7 +1,7 @@
 package com.example.personalshop.model.detail
 
-class Struct (
+class Struct(
 
-	val number : String,
-	val unit : String
+    val number: String,
+    val unit: String
 )

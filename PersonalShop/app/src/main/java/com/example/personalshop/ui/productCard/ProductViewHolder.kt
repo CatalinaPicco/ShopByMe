@@ -1,6 +1,5 @@
-package com.example.personalshop.home.productCard
+package com.example.personalshop.ui.productCard
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.R
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.utils.GenericAdapter
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.product_card_layout.view.*

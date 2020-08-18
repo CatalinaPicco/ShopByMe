@@ -1,7 +1,7 @@
 package com.example.personalshop.model.detail
 
-class Geolocation (
+class Geolocation(
 
-	val latitude : Double,
-	val longitude : Double
+    val latitude: Double,
+    val longitude: Double
 )

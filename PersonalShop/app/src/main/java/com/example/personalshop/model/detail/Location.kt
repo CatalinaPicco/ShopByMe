@@ -1,5 +1,5 @@
 package com.example.personalshop.model.detail
 
-class Location (
+class Location(
 
 )

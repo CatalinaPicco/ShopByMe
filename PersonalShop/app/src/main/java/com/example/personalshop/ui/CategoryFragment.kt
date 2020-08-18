@@ -1,4 +1,4 @@
-package com.example.personalshop
+package com.example.personalshop.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import com.example.personalshop.home.categoryCard.CategoryViewHolder
+import com.example.personalshop.MainViewModel
+import com.example.personalshop.R
+import com.example.personalshop.ui.categoryCard.CategoryViewHolder
 import com.example.personalshop.model.categories.Category
 import com.example.personalshop.model.search.Results
 import com.example.personalshop.utils.GenericAdapter
@@ -30,7 +32,7 @@ class CategoryFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java!!)
+        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
 
         if(!viewModel!!.alreadyExecuted) {
             viewModel?.getCategories()

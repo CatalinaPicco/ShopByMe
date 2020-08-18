@@ -1,4 +1,4 @@
-package com.example.personalshop.home.productCard
+package com.example.personalshop.ui.productCard
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.personalshop.R
 import com.example.personalshop.model.detail.Pictures
 import com.example.personalshop.utils.GenericAdapter
 import com.squareup.picasso.Picasso

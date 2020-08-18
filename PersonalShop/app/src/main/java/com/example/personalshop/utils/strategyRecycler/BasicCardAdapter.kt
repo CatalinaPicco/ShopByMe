@@ -1,4 +1,4 @@
-package com.example.personalshop.home.strategyRecycler
+package com.example.personalshop.utils.strategyRecycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
