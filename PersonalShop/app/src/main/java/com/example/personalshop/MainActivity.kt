@@ -21,14 +21,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.personalshop.home.EmptyFragment
 import com.example.personalshop.home.HomeResultsFragment
-import com.example.personalshop.services.SearchService
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.search_toolbar.*
 
@@ -36,7 +33,6 @@ import kotlinx.android.synthetic.main.search_toolbar.*
 class MainActivity : AppCompatActivity() {
 
     private var viewModel: MainViewModel? = null
-    private var disposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -53,9 +49,9 @@ class MainActivity : AppCompatActivity() {
         setSearchtollbar()
 
         viewModel?.selectedCategory?.observe(this, Observer {
+            viewModel?.onCategoryChange(it)
             if (it != null) {
-                viewModel?.query?.value = null
-                tv_category.text = /**/"Buscar en ${it.name}"
+                tv_category.text = "Buscar en ${it.name}"
                 tv_category.visibility = View.VISIBLE
             }
         })
@@ -69,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel?.query?.observe(this, Observer {
+            viewModel?.onChangeQuery(it)
             if (it != null && it.isNotEmpty()  ){
                 tv_product.visibility = View.VISIBLE
                 val spannable = SpannableString(getString(R.string.result_title, it.toUpperCase()))
@@ -86,10 +83,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         tv_category.setOnClickListener {
-            viewModel?.selectedCategory?.value = null
             tv_category.text = ""
             tv_category.visibility = View.GONE
-            viewModel?.query?.value = ""
+            viewModel?.emptyCategory()
         }
 
         showFragment(CategoryFragment())
@@ -172,7 +168,7 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 callSearch(query)
-                viewModel?.emptyQuery()
+                //viewModel?.emptyQuery()
                 searchView.clearFocus()
                 showFragment(HomeResultsFragment())
                 return true
@@ -219,11 +215,6 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    override fun onPause() {
-        super.onPause()
-        disposable?.dispose()
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     fun circleReveal(viewID: Int, posFromRight: Int, containsOverflow: Boolean, isShow: Boolean) {
         val myView = findViewById<View>(viewID)
@@ -263,6 +254,11 @@ class MainActivity : AppCompatActivity() {
         // start the animation
         anim.start()
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel?.disposable?.dispose()
     }
 
 }

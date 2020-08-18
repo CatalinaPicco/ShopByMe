@@ -11,22 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.personalshop.home.categoryCard.CategoryViewHolder
 import com.example.personalshop.model.categories.Category
 import com.example.personalshop.model.search.Results
-import com.example.personalshop.services.SearchService
 import com.example.personalshop.utils.GenericAdapter
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoryFragment: Fragment() {
 
     private var viewModel: MainViewModel? = null
     var genericAdapterProducts: GenericAdapter<Any>? = null
-
-    private var disposable: Disposable? = null
-    private val searchService by lazy {
-        SearchService.create()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +33,7 @@ class CategoryFragment: Fragment() {
         viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java!!)
 
         if(!viewModel!!.alreadyExecuted) {
-            getCategories()
+            viewModel?.getCategories()
             viewModel!!.alreadyExecuted = true
         }
 
@@ -82,39 +73,9 @@ class CategoryFragment: Fragment() {
 
     }
 
-    private fun getCategories() {
-        disposable = searchService.getCategories()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { result -> run {
-                    //viewModel?.categories?.value = result
-                    viewModel?.categoriesAux = result
-                    result.forEach {
-                        getCategoryDetail(it.id)
-                    }
-                } },
-                { error -> println("error: " + error.message) }
-            )
-    }
-
-    fun getCategoryDetail(categoryId: String) {
-        disposable = searchService.getCategoriesDetail(categoryId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { result -> viewModel?.fullCategories(result) },
-                { error -> println("error: " + error.message) }
-            )
-    }
-
     private fun onItemClick(data: Category) {
         viewModel?.selectedCategory?.value = data
         viewModel?.onSearchClick?.invoke()
     }
 
-    override fun onPause() {
-        super.onPause()
-        disposable?.dispose()
-    }
 }
