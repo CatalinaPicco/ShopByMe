@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.personalshop.home.EmptyFragment
 import com.example.personalshop.home.HomeResultsFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.search_toolbar.*
 
 
@@ -42,9 +43,11 @@ class MainActivity : AppCompatActivity() {
         // Setting up View model
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        val toolbar1 = findViewById(R.id.app_bar) as Toolbar
-        setSupportActionBar(toolbar1)
-        supportActionBar?.setDisplayShowTitleEnabled(true)
+
+
+        setSupportActionBar(toolBar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        tv_toolbar_title.text = "Personal Shop"
 
         setSearchtollbar()
 
